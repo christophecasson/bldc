@@ -42,7 +42,7 @@
 //#define VIN_R2				2200.0
 //#define CURRENT_AMP_GAIN	10.0
 //#define CURRENT_SHUNT_RES	0.0005
-//#define WS2811_ENABLE			1
+#define WS2811_ENABLE			1
 //#define CURR1_DOUBLE_SAMPLE		0
 //#define CURR2_DOUBLE_SAMPLE		0
 
@@ -101,8 +101,8 @@
 #define WS2811_ENABLE			0
 #endif
 #define WS2811_CLK_HZ			800000
-#define WS2811_LED_NUM			28
-#define WS2811_USE_CH2			1		// 0: CH1 (PB6) 1: CH2 (PB7)
+#define WS2811_LED_NUM			32
+#define WS2811_USE_CH2			0		// 0: CH1 (PB6) 1: CH2 (PB7)
 
 /*
  * Servo output driver
