@@ -150,8 +150,8 @@ static THD_FUNCTION(chuk_thread, arg) {
 				chuck_d_tmp.acc_x = (rxbuf[2] << 2) | ((rxbuf[5] >> 2) & 3);
 				chuck_d_tmp.acc_y = (rxbuf[3] << 2) | ((rxbuf[5] >> 4) & 3);
 				chuck_d_tmp.acc_z = (rxbuf[4] << 2) | ((rxbuf[5] >> 6) & 3);
-				chuck_d_tmp.bt_z = !((rxbuf[5] >> 0) & 1);
-				chuck_d_tmp.bt_c = !((rxbuf[5] >> 1) & 1);
+				chuck_d_tmp.bt_c = !((rxbuf[5] >> 0) & 1);
+				chuck_d_tmp.bt_z = !((rxbuf[5] >> 1) & 1);
 
 				app_nunchuk_update_output(&chuck_d_tmp);
 			}
