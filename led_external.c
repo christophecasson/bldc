@@ -123,15 +123,23 @@ static THD_FUNCTION(led_thread, arg) {
 				}
 
 				while (state == state_last && rev_last == reverse_leds && !HAS_FAULT()) {
-					if ((chVTGetSystemTime() / (CH_CFG_ST_FREQUENCY / 2)) % 2) {
-						set_led_wrapper(WS2811_LED_NUM / 2 - 1, COLOR_ORANGE);
-						set_led_wrapper(WS2811_LED_NUM / 2, COLOR_ORANGE);
-					} else {
-						set_led_wrapper(WS2811_LED_NUM / 2 - 1, COLOR_BLACK);
-						set_led_wrapper(WS2811_LED_NUM / 2, COLOR_BLACK);
-					}
-					chThdSleepMilliseconds(10);
-				}
+                                        if ((chVTGetSystemTime() / (CH_CFG_ST_FREQUENCY / 2)) % 2) {
+                                                set_led_wrapper(WS2811_LED_NUM / 2 - 1, COLOR_ORANGE);
+                                                set_led_wrapper(WS2811_LED_NUM / 2 - 2, COLOR_ORANGE);
+                                                set_led_wrapper(WS2811_LED_NUM / 2 - 3, COLOR_ORANGE);
+                                                set_led_wrapper(WS2811_LED_NUM / 2 + 0, COLOR_ORANGE);
+                                                set_led_wrapper(WS2811_LED_NUM / 2 + 1, COLOR_ORANGE);
+                                                set_led_wrapper(WS2811_LED_NUM / 2 + 2, COLOR_ORANGE);
+                                        } else {
+                                                set_led_wrapper(WS2811_LED_NUM / 2 - 1, COLOR_BLACK);
+                                                set_led_wrapper(WS2811_LED_NUM / 2 - 2, COLOR_BLACK);
+                                                set_led_wrapper(WS2811_LED_NUM / 2 - 3, COLOR_BLACK);
+                                                set_led_wrapper(WS2811_LED_NUM / 2 + 0, COLOR_BLACK);
+                                                set_led_wrapper(WS2811_LED_NUM / 2 + 1, COLOR_BLACK);
+                                                set_led_wrapper(WS2811_LED_NUM / 2 + 2, COLOR_BLACK);
+                                        }
+                                        chThdSleepMilliseconds(10);
+                                }
 				break;
 
 			case LED_EXT_TURN_RIGHT:
@@ -145,16 +153,24 @@ static THD_FUNCTION(led_thread, arg) {
 					set_led_wrapper(i + WS2811_LED_NUM / 2, COLOR_WHITE);
 				}
 
-				while (state == state_last && rev_last == reverse_leds && !HAS_FAULT()) {
-					if ((chVTGetSystemTime() / (CH_CFG_ST_FREQUENCY / 2)) % 2) {
-						set_led_wrapper(0, COLOR_ORANGE);
-						set_led_wrapper(WS2811_LED_NUM - 1, COLOR_ORANGE);
-					} else {
-						set_led_wrapper(0, COLOR_BLACK);
-						set_led_wrapper(WS2811_LED_NUM - 1, COLOR_BLACK);
-					}
-					chThdSleepMilliseconds(10);
-				}
+                                while (state == state_last && rev_last == reverse_leds && !HAS_FAULT()) {
+                                        if ((chVTGetSystemTime() / (CH_CFG_ST_FREQUENCY / 2)) % 2) {
+                                                set_led_wrapper(0, COLOR_ORANGE);
+                                                set_led_wrapper(1, COLOR_ORANGE);
+                                                set_led_wrapper(2, COLOR_ORANGE);
+                                                set_led_wrapper(WS2811_LED_NUM - 1, COLOR_ORANGE);
+                                                set_led_wrapper(WS2811_LED_NUM - 2, COLOR_ORANGE);
+                                                set_led_wrapper(WS2811_LED_NUM - 3, COLOR_ORANGE);
+                                        } else {
+                                                set_led_wrapper(0, COLOR_BLACK);
+                                                set_led_wrapper(1, COLOR_BLACK);
+                                                set_led_wrapper(2, COLOR_BLACK);
+                                                set_led_wrapper(WS2811_LED_NUM - 1, COLOR_BLACK);
+                                                set_led_wrapper(WS2811_LED_NUM - 2, COLOR_BLACK);
+                                                set_led_wrapper(WS2811_LED_NUM - 3, COLOR_BLACK);
+                                        }
+                                        chThdSleepMilliseconds(10);
+                                }
 				break;
 
 			case LED_EXT_BATT:
