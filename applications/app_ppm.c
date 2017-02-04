@@ -132,11 +132,17 @@ static THD_FUNCTION(ppm_thread, arg) {
 
 		utils_deadband(&servo_val, config.hyst, 1.0);
 
+		led_external_set_state(LED_EXT_BATT);
+		
+
+		static bool led_reverse = false;
 		float current = 0;
 		bool current_mode = false;
 		bool current_mode_brake = false;
 		const volatile mc_configuration *mcconf = mc_interface_get_configuration();
 		bool send_duty = false;
+
+		led_external_set_reversed(led_reverse);
 
 		switch (config.ctrl_type) {
 		case PPM_CTRL_TYPE_CURRENT:
@@ -246,6 +252,8 @@ static THD_FUNCTION(ppm_thread, arg) {
 						comm_can_set_current_brake(msg->id, current);
 					}
 				}
+
+				led_external_set_state(LED_EXT_BRAKE);
 			} else {
 				// Apply soft RPM limit
 				if (rpm_lowest > config.rpm_lim_end && current > 0.0) {
@@ -313,6 +321,8 @@ static THD_FUNCTION(ppm_thread, arg) {
 				} else {
 					mc_interface_set_current(current_out);
 				}
+
+				led_external_set_state(LED_EXT_NORMAL);
 			}
 		}
 
